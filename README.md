@@ -1,17 +1,166 @@
-# jot_jai_app
+# 🧠 JotJai App
 
-A new Flutter project.
+A mindfulness & journaling Flutter application designed to help users reflect their mood, relax with guided sessions, and track their mental wellness over time.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Features
 
-A few resources to get you started if this is your first Flutter project:
+* 🎧 Guided meditation / focus sessions with audio
+* 😊 Mood selection after each session
+* ⏱ Session timer with pause & resume
+* 🧘 Reflection screen for journaling
+* 📊 Weekly mood tracking overview
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📸 Screenshots
+
+> *(Add your app screenshots here)*
+
+| Home                         | Session                         | Result                         |
+| ---------------------------- | ------------------------------- | ------------------------------ |
+| ![](assets/screens/home.png) | ![](assets/screens/session.png) | ![](assets/screens/result.png) |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* Flutter SDK (3.x or later)
+* Dart SDK
+
+### Installation
+
+```bash
+git clone https://github.com/your-username/jot_jai_app.git
+cd jot_jai_app
+flutter pub get
+flutter run
+```
+
+---
+
+## 🧱 Tech Stack
+
+* **Framework:** Flutter
+* **Language:** Dart
+* **Architecture:** Feature-based structure
+* **State Management:** (Provider / Riverpod / Bloc)
+
+---
+
+## 📂 Project Structure
+
+```bash
+lib/
+ ├── core/        # shared utils, theme, constants
+ ├── features/    # feature modules (session, mood, etc.)
+ └── main.dart
+```
+
+---
+
+## 🎯 Future Improvements
+
+* 🔔 Daily reminder notifications
+* ☁️ Cloud sync (Firebase / Supabase)
+* 📈 Mood analytics dashboard
+* 🔐 User authentication
+
+---
+
+## 👨‍💻 Author
+
+**Suriya Wongaiyara**
+Flutter Developer
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+# 🧠 JotJai App
+
+A mindfulness & journaling Flutter application designed to help users reflect their mood, relax with guided sessions, and track their mental wellness over time.
+
+---
+
+## 📱 Features
+
+* 🎧 Guided meditation / focus sessions with audio
+* 😊 Mood selection after each session
+* ⏱ Session timer with pause & resume
+* 🧘 Reflection screen for journaling
+* 📊 Weekly mood tracking overview
+
+---
+
+## 📸 Screenshots
+
+> *(Add your app screenshots here)*
+
+| Home                         | Session                         | Result                         |
+| ---------------------------- | ------------------------------- | ------------------------------ |
+| ![](assets/screens/home.png) | ![](assets/screens/session.png) | ![](assets/screens/result.png) |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* Flutter SDK (3.x or later)
+* Dart SDK
+
+### Installation
+
+```bash
+git clone https://github.com/wung-satalo/jot_jai_app.git
+cd jot_jai_app
+flutter pub get
+flutter run
+```
+
+---
+
+## 🧱 Tech Stack
+
+* **Framework:** Flutter
+* **Language:** Dart
+* **Architecture:** Feature-based structure
+* **State Management:** (Provider / Riverpod / Bloc)
+
+---
+
+## 📂 Project Structure
+
+```bash
+lib/
+ ├── core/        # shared utils, theme, constants
+ ├── features/    # feature modules (session, mood, etc.)
+ └── main.dart
+```
+
+---
+
+## 🎯 Future Improvements
+
+* 🔔 Daily reminder notifications
+* ☁️ Cloud sync (Firebase / Supabase)
+* 📈 Mood analytics dashboard
+* 🔐 User authentication
+
+---
+
+## 👨‍💻 Author
+
+**Suriya Wongaiyara**
+Flutter Developer
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
