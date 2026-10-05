@@ -17,12 +17,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _bottomNavIndex = 0;
 
-  final iconList = [
-    Icons.home,
-    Icons.map,
-    Icons.bar_chart,
-    Icons.person,
-  ];
+  final iconList = [Icons.home, Icons.map, Icons.bar_chart, Icons.person];
 
   final textList = ["Home", "Map", "Stats", "Profile"];
 
@@ -37,8 +32,8 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      // extendBody: true,
 
+      // extendBody: true,
       body: IndexedStack(index: _bottomNavIndex, children: pages),
 
       floatingActionButton: FloatingActionButton(
