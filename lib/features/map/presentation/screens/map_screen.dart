@@ -16,36 +16,35 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Live Map')),
-      body: LongdoMapWidget(
-        apiKey: "8304cf14528ce9e9333c8021924428f4",
-        key: map,
-        eventName: [
-          IJavascriptChannel(
-            name: "ready",
-            onMessageReceived: (message) {
-              if (kDebugMode) {
-                print("Map Ready!");
-              }
+      body: kIsWeb
+          ? const Center(
+              child: Text(
+                'The live map is only available in the Android and iOS app.',
+              ),
+            )
+          : LongdoMapWidget(
+              apiKey: "8304cf14528ce9e9333c8021924428f4",
+              key: map,
+              eventName: [
+                IJavascriptChannel(
+                  name: "ready",
+                  onMessageReceived: (message) {
+                    if (kDebugMode) {
+                      print("Map Ready!");
+                    }
 
-              /// เพิ่ม marker
-              var marker = Longdo.LongdoObject(
-                "Marker",
-                args: [
-                  {
-                    "lon": 100.5018,
-                    "lat": 13.7563,
+                    var marker = Longdo.LongdoObject(
+                      "Marker",
+                      args: [
+                        {"lon": 100.5018, "lat": 13.7563},
+                      ],
+                    );
+
+                    map.currentState?.call("Overlays.add", args: [marker]);
                   },
-                ],
-              );
-
-              map.currentState?.call(
-                "Overlays.add",
-                args: [marker],
-              );
-            },
-          ),
-        ],
-      ),
+                ),
+              ],
+            ),
     );
   }
 }

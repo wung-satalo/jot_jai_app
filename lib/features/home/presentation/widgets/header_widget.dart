@@ -8,33 +8,42 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      // color: AppColors.darkBackground,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              GreetingText(), 
-              SizedBox(height: 4),
-              DateText()
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [GreetingText(), SizedBox(height: 6), DateText()],
+          ),
+        ),
+        Container(
+          width: 52,
+          height: 52,
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            shape: BoxShape.circle,
+            border: Border.all(color: AppColors.surface, width: 3),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withValues(alpha: 0.16),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
+              ),
             ],
           ),
-          CircleAvatar(
-            backgroundColor: AppColors.primary,
+          child: const Center(
             child: Text(
               'SW',
               style: TextStyle(
-                color: AppColors.background,
-                fontSize: 16,
+                color: AppColors.textOnPrimary,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

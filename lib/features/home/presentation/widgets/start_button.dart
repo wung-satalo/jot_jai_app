@@ -8,18 +8,15 @@ class StartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       child: TextButton.icon(
         style: TextButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.textOnPrimary,
-
-          minimumSize: const Size(double.infinity, 60),
-
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-
+          minimumSize: const Size(double.infinity, 58),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: BorderRadius.circular(18),
           ),
         ),
         onPressed: () {

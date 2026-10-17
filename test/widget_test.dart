@@ -1,175 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jot_jai_app/app.dart';
-import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
+import 'package:jot_jai_app/features/auth/presentation/login_screen.dart';
+import 'package:jot_jai_app/features/home/presentation/screens/home_screen.dart';
+import 'package:jot_jai_app/features/home/presentation/widgets/bottom_navbar.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
-  setUp(() {
-    WebViewPlatform.instance = FakeWebViewPlatform();
-  });
-
-  testWidgets('app boots and shows the main navigation', (
+  testWidgets('home layout fits a compact phone screen', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MyApp());
+    tester.view.physicalSize = const Size(320, 568);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: HomeScreen())),
+    );
+
+    expect(find.text('Your practice'), findsOneWidget);
+    expect(find.text('Start Session'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('main navigation keeps the map slot disabled', (
+    WidgetTester tester,
+  ) async {
+    int? selectedIndex;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          bottomNavigationBar: MainNavigationBar(
+            activeIndex: 0,
+            onTap: (index) => selectedIndex = index,
+          ),
+        ),
+      ),
+    );
 
     expect(find.text('Home'), findsOneWidget);
-    expect(find.text('Map'), findsOneWidget);
     expect(find.text('Stats'), findsOneWidget);
     expect(find.text('Profile'), findsOneWidget);
+    expect(find.text('Soon'), findsOneWidget);
+
+    await tester.tap(find.text('Soon'));
+    expect(selectedIndex, isNull);
+
+    await tester.tap(find.text('Stats'));
+    expect(selectedIndex, 1);
   });
-}
 
-class FakeWebViewPlatform extends WebViewPlatform {
-  @override
-  PlatformWebViewController createPlatformWebViewController(
-    PlatformWebViewControllerCreationParams params,
-  ) {
-    return FakePlatformWebViewController(params);
-  }
+  testWidgets('login form validates fields and supports account creation', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
 
-  @override
-  PlatformWebViewWidget createPlatformWebViewWidget(
-    PlatformWebViewWidgetCreationParams params,
-  ) {
-    return FakePlatformWebViewWidget(params);
-  }
-}
+    await tester.tap(find.text('เข้าสู่ระบบ').first);
+    await tester.pumpAndSettle();
 
-class FakePlatformWebViewController extends PlatformWebViewController {
-  FakePlatformWebViewController(super.params) : super.implementation();
-  @override
-  Future<void> loadFile(String absoluteFilePath) async {}
+    expect(find.text('กรุณากรอกอีเมล'), findsOneWidget);
+    expect(find.text('กรุณากรอกรหัสผ่าน'), findsOneWidget);
 
-  @override
-  Future<void> loadFlutterAsset(String key) async {}
+    await tester.tap(find.text('สมัครสมาชิก'));
+    await tester.pumpAndSettle();
+    expect(find.text('สร้างบัญชี JotJai'), findsOneWidget);
 
-  @override
-  Future<void> loadHtmlString(String html, {String? baseUrl}) async {}
+    await tester.enterText(
+      find.byType(TextFormField).first,
+      'user@example.com',
+    );
+    await tester.enterText(find.byType(TextFormField).last, 'short');
+    await tester.tap(find.text('สร้างบัญชี').last);
+    await tester.pumpAndSettle();
 
-  @override
-  Future<void> loadRequest(LoadRequestParams params) async {}
-
-  @override
-  Future<String?> currentUrl() async => null;
-
-  @override
-  Future<bool> canGoBack() async => false;
-
-  @override
-  Future<bool> canGoForward() async => false;
-
-  @override
-  Future<void> goBack() async {}
-
-  @override
-  Future<void> goForward() async {}
-
-  @override
-  Future<void> reload() async {}
-
-  @override
-  Future<void> clearCache() async {}
-
-  @override
-  Future<void> clearLocalStorage() async {}
-
-  @override
-  Future<void> setPlatformNavigationDelegate(
-    PlatformNavigationDelegate handler,
-  ) async {}
-
-  @override
-  Future<void> runJavaScript(String javaScript) async {}
-
-  @override
-  Future<Object> runJavaScriptReturningResult(String javaScript) async => '';
-
-  @override
-  Future<void> addJavaScriptChannel(
-    JavaScriptChannelParams javaScriptChannelParams,
-  ) async {}
-
-  @override
-  Future<void> removeJavaScriptChannel(String javaScriptChannelName) async {}
-
-  @override
-  Future<String?> getTitle() async => null;
-
-  @override
-  Future<void> scrollTo(int x, int y) async {}
-
-  @override
-  Future<void> scrollBy(int x, int y) async {}
-
-  @override
-  Future<void> setVerticalScrollBarEnabled(bool enabled) async {}
-
-  @override
-  Future<void> setHorizontalScrollBarEnabled(bool enabled) async {}
-
-  @override
-  Future<Offset> getScrollPosition() async => Offset.zero;
-
-  @override
-  Future<void> enableZoom(bool enabled) async {}
-
-  @override
-  Future<void> setBackgroundColor(Color color) async {}
-
-  @override
-  Future<void> setJavaScriptMode(JavaScriptMode javaScriptMode) async {}
-
-  @override
-  Future<void> setUserAgent(String? userAgent) async {}
-
-  @override
-  Future<void> setOnPlatformPermissionRequest(
-    void Function(PlatformWebViewPermissionRequest request) onPermissionRequest,
-  ) async {}
-
-  @override
-  Future<String?> getUserAgent() async => null;
-
-  @override
-  Future<void> setOnConsoleMessage(
-    void Function(JavaScriptConsoleMessage consoleMessage) onConsoleMessage,
-  ) async {}
-
-  @override
-  Future<void> setOnScrollPositionChange(
-    void Function(ScrollPositionChange scrollPositionChange)?
-    onScrollPositionChange,
-  ) async {}
-
-  @override
-  Future<void> setOnJavaScriptAlertDialog(
-    Future<void> Function(JavaScriptAlertDialogRequest request)
-    onJavaScriptAlertDialog,
-  ) async {}
-
-  @override
-  Future<void> setOnJavaScriptConfirmDialog(
-    Future<bool> Function(JavaScriptConfirmDialogRequest request)
-    onJavaScriptConfirmDialog,
-  ) async {}
-
-  @override
-  Future<void> setOnJavaScriptTextInputDialog(
-    Future<String> Function(JavaScriptTextInputDialogRequest request)
-    onJavaScriptTextInputDialog,
-  ) async {}
-
-  @override
-  Future<void> setOverScrollMode(WebViewOverScrollMode mode) async {}
-}
-
-class FakePlatformWebViewWidget extends PlatformWebViewWidget {
-  FakePlatformWebViewWidget(super.params) : super.implementation();
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox.shrink();
-  }
+    expect(find.text('รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร'), findsOneWidget);
+  });
 }

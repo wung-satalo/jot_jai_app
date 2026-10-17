@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jot_jai_app/features/home/presentation/widgets/bottom_navbar.dart';
+import 'package:jot_jai_app/features/auth/presentation/auth_gate.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       ),
 
       debugShowCheckedModeBanner: true,
-      home: const MainPage(),
+      home: const AuthGate(),
     );
   }
 }

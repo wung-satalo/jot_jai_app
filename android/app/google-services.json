@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "992753432827",
+    "project_id": "jot-jai-app",
+    "storage_bucket": "jot-jai-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992753432827:android:99e8b61495d0c39ed6185e",
+        "android_client_info": {
+          "package_name": "com.example.jot_jai_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEeYbhhfh4-xjZwhRtzN-b9q2SYsz5qyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

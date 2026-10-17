@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jot_jai_app/core/theme/app_colors.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -6,6 +7,19 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    final email = user?.email ?? '';
+    final name =
+        user?.displayName ??
+        (email.isNotEmpty ? email.split('@').first : 'JotJai User');
+    final initials = name
+        .trim()
+        .split(RegExp(r'\s+'))
+        .where((part) => part.isNotEmpty)
+        .take(2)
+        .map((part) => part[0].toUpperCase())
+        .join();
+
     return Container(
       padding: EdgeInsets.all(20),
       margin: EdgeInsets.all(16),
@@ -27,10 +41,10 @@ class ProfileCard extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.border, width: 3),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    "SW",
-                    style: TextStyle(
+                    initials,
+                    style: const TextStyle(
                       fontSize: 36,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -62,7 +76,7 @@ class ProfileCard extends StatelessWidget {
           const SizedBox(height: 16),
 
           Text(
-            "Suriya Wongaiyara",
+            name,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -70,10 +84,7 @@ class ProfileCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          Text(
-            "Wongaiyara.Suriya@gmail.com",
-            style: TextStyle(fontSize: 14, color: AppColors.border),
-          ),
+          Text(email, style: TextStyle(fontSize: 14, color: AppColors.border)),
 
           const SizedBox(height: 16),
           Row(
